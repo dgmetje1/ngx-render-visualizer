@@ -1,6 +1,6 @@
 {
   "name": "ngx-render-visualizer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "See what Angular change detection does: flashes checked and re-rendered components, shows why each cycle ran, and live render metrics. Dev-only, one provider line, or a script tag.",
   "keywords": [
     "angular",
