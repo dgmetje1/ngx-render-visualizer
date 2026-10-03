@@ -1,6 +1,6 @@
 {
   "name": "ngx-render-visualizer",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "See what Angular change detection does: flashes checked and re-rendered components, shows why each cycle ran, and live render metrics. Dev-only, one provider line, or a script tag.",
   "keywords": [
     "angular",
@@ -15,6 +15,14 @@
     "visualizer"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dgmetje1/ngx-render-visualizer.git"
+  },
+  "homepage": "https://github.com/dgmetje1/ngx-render-visualizer#readme",
+  "bugs": {
+    "url": "https://github.com/dgmetje1/ngx-render-visualizer/issues"
+  },
   "publishConfig": {
     "access": "public"
   },
