@@ -1,0 +1,56 @@
+name: Publish to npm
+
+# Publishes with npm trusted publishing (OIDC): no npm token is stored anywhere.
+#
+# One-time setup on npmjs.com (package -> Settings -> Trusted Publisher -> GitHub Actions):
+#   Organization or user: <your GitHub owner>
+#   Repository:           <this repository's name>
+#   Workflow filename:    publish.yml
+#   Environment:          (leave empty, or match `environment:` below if you add one)
+#
+# Release: `pnpm version:lib patch`, commit, then `git tag v0.1.1 && git push --tags`.
+# The tag must match projects/render-visualizer/package.json, and that file's `repository.url`
+# must point at this GitHub repository (npm checks it for trusted publishing and provenance).
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  id-token: write # lets npm exchange the workflow's OIDC token for a short-lived publish credential
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - name: npm must support trusted publishing (11.5.1 or newer)
+        run: |
+          npm install -g npm@latest
+          node -e "const [a,b,c]=process.argv[1].split('.').map(Number); if (a<11 || (a===11 && (b<5 || (b===5 && c<1)))) { console.error('npm '+process.argv[1]+' is too old for trusted publishing'); process.exit(1) }" "$(npm --version)"
+      - run: pnpm install --frozen-lockfile
+      - name: Tag and repository must match the package metadata
+        run: |
+          node - <<'JS'
+          const pkg = require('./projects/render-visualizer/package.json');
+          const tag = process.env.GITHUB_REF_NAME;
+          if (tag !== `v${pkg.version}`) throw new Error(`Tag ${tag} does not match package version ${pkg.version}`);
+          const url = typeof pkg.repository === 'string' ? pkg.repository : pkg.repository?.url;
+          const slug = process.env.GITHUB_REPOSITORY.toLowerCase();
+          if (!url || !url.toLowerCase().replace(/\.git$/, '').endsWith(`github.com/${slug}`)) {
+            throw new Error(`package.json "repository.url" (${url}) must point at https://github.com/${process.env.GITHUB_REPOSITORY}`);
+          }
+          JS
+      - run: pnpm test
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm e2e
+      - run: pnpm build
+      # `npm publish` (not pnpm) so the OIDC exchange and provenance are handled by npm itself.
+      - run: npm publish --access public
+        working-directory: dist/ngx-render-visualizer

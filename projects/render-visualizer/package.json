@@ -1,0 +1,30 @@
+{
+  "name": "ngx-render-visualizer",
+  "version": "0.1.0",
+  "description": "See what Angular change detection does: flashes checked and re-rendered components, shows why each cycle ran, and live render metrics. Dev-only, one provider line, or a script tag.",
+  "keywords": [
+    "angular",
+    "change-detection",
+    "devtools",
+    "performance",
+    "profiler",
+    "signals",
+    "zoneless",
+    "onpush",
+    "render",
+    "visualizer"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "unpkg": "ngx-render-visualizer.global.js",
+  "jsdelivr": "ngx-render-visualizer.global.js",
+  "peerDependencies": {
+    "@angular/core": ">=22.0.0 <23.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

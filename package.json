@@ -1,0 +1,47 @@
+{
+  "name": "ngx-render-visualizer-ws",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve demo-dashboard",
+    "start:zone": "echo 'open http://localhost:4200/?mode=zone' && ng serve demo-dashboard",
+    "build": "ng build render-visualizer && pnpm build:global",
+    "build:demo": "ng build demo-dashboard",
+    "watch": "ng build render-visualizer --watch --configuration development",
+    "test": "ng test render-visualizer --watch=false",
+    "test:watch": "ng test render-visualizer",
+    "e2e": "pnpm build:global && playwright test",
+    "pack:lib": "pnpm build && pnpm --dir dist/ngx-render-visualizer pack",
+    "build:global": "esbuild projects/render-visualizer/src/global.ts --bundle --minify --format=iife --target=es2022 --outfile=dist/ngx-render-visualizer/ngx-render-visualizer.global.js",
+    "version:lib": "npm version --no-git-tag-version --prefix projects/render-visualizer",
+    "release:check": "pnpm test && pnpm e2e && pnpm build && pnpm --dir dist/ngx-render-visualizer pack --dry-run",
+    "publish:dry": "pnpm build && pnpm --dir dist/ngx-render-visualizer publish --dry-run --no-git-checks",
+    "publish:lib": "pnpm test && pnpm build && pnpm --dir dist/ngx-render-visualizer publish --access public --no-git-checks"
+  },
+  "private": true,
+  "packageManager": "pnpm@12.5.1",
+  "dependencies": {
+    "@angular/common": "^22.2.0",
+    "@angular/compiler": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@angular/forms": "^22.2.0",
+    "@angular/platform-browser": "^22.2.0",
+    "@angular/router": "^22.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "^0.16.3"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.2.1",
+    "@angular/cli": "^22.2.1",
+    "@angular/compiler-cli": "^22.2.0",
+    "@playwright/test": "^1.63.0",
+    "esbuild": "^0.28.2",
+    "jsdom": "^30.0.0",
+    "ng-packagr": "^22.2.0",
+    "playwright": "^1.63.0",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2",
+    "vitest": "^5.0.0"
+  }
+}
