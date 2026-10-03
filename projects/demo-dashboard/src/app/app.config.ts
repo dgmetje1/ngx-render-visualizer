@@ -6,7 +6,7 @@ import {
   provideZonelessChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideRenderVisualizer } from 'ngx-render-visualizer';
+import { provideRenderVisualizer } from '@dgmetje1/ngx-render-visualizer';
 import { routes } from './app.routes';
 
 /** `?mode=zone` runs with zone.js (loaded in index.html); the default is zoneless. */

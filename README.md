@@ -5,7 +5,7 @@ See what Angular change detection actually does: which components get checked, w
 ```ts
 // app.config.ts
 import { isDevMode } from '@angular/core';
-import { provideRenderVisualizer } from 'ngx-render-visualizer';
+import { provideRenderVisualizer } from '@dgmetje1/ngx-render-visualizer';
 
 providers: [provideRenderVisualizer({ enabled: isDevMode() })]
 ```
@@ -16,7 +16,7 @@ Works with Angular 22+ standalone apps, both zoneless and zone.js. It is off in 
 
 | Path | What it is |
 |------|------------|
-| `projects/render-visualizer` | The `ngx-render-visualizer` library: flash overlay, component tree, step/slow-motion replay, freeze mode, toolbar. |
+| `projects/render-visualizer` | The `@dgmetje1/ngx-render-visualizer` library: flash overlay, component tree, step/slow-motion replay, freeze mode, toolbar. |
 | `projects/demo-dashboard` | An "Ops Dashboard" demo. `OnPush` is the default; some components opt into `Eager` for comparison. |
 | `e2e` | Playwright tests that run against the demo in both zone and zoneless modes. |
 
@@ -58,7 +58,7 @@ To try the built package in another app, run `pnpm pack:lib`, then `pnpm add` th
 
 ## Publishing to npm
 
-The package is `ngx-render-visualizer` (the name was free on npm when checked). Its metadata lives in `projects/render-visualizer/package.json`; the license is MIT, with a placeholder copyright holder in `projects/render-visualizer/LICENSE` to edit.
+The package is `@dgmetje1/ngx-render-visualizer`, published under the `dgmetje1` npm user scope. Its metadata lives in `projects/render-visualizer/package.json`; the license is MIT, with a placeholder copyright holder in `projects/render-visualizer/LICENSE` to edit.
 
 One-time: `npm login` (or set an `NPM_TOKEN`). Then, for each release:
 
@@ -82,7 +82,7 @@ One-time setup:
 
 Then each release is: `pnpm version:lib patch`, commit, `git tag v0.1.1 && git push --tags`. The workflow also checks that the tag matches the package version, runs the tests and e2e tests, builds, and publishes with `npm publish` (npm 11.5.1 or newer is required, and the workflow installs it).
 
-After publishing, the script-tag build is available from a CDN, for example `https://unpkg.com/ngx-render-visualizer`.
+After publishing, the script-tag build is available from a CDN, for example `https://unpkg.com/@dgmetje1/ngx-render-visualizer`.
 
 ## Caveats
 

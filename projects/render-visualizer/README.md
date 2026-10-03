@@ -1,11 +1,15 @@
-# ngx-render-visualizer
+# @dgmetje1/ngx-render-visualizer
 
 See what Angular change detection actually does. Drop-in, dev-only, one provider line.
+
+```sh
+pnpm add -D @dgmetje1/ngx-render-visualizer   # or npm i -D / yarn add -D
+```
 
 ```ts
 // app.config.ts
 import { isDevMode } from '@angular/core';
-import { provideRenderVisualizer } from 'ngx-render-visualizer';
+import { provideRenderVisualizer } from '@dgmetje1/ngx-render-visualizer';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRenderVisualizer({ enabled: isDevMode() })],

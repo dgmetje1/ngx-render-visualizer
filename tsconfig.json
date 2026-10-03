@@ -12,7 +12,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "paths": {
-      "ngx-render-visualizer": ["./projects/render-visualizer/src/public-api.ts"]
+      "@dgmetje1/ngx-render-visualizer": ["./projects/render-visualizer/src/public-api.ts"]
     },
     "target": "ES2022",
     "module": "preserve"
